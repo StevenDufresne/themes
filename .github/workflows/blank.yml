@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v2
         env:
           branchRef:  ${{ github.head_ref }}
-      - run: node -e "console.log('$branchRef')";
+      - run: node -e "console.log('ok')";
 #       
 #       - name: Run Theme Check Action
 #         uses: StevenDufresne/wp-theme-validation-action-experiment@main
