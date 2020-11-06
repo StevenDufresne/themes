@@ -22,7 +22,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - name: Extract
           id: step1
-          run: node -e "console.log(\`::set-output name=folder::${process.env.GITHUB_WORKSPACE}\`)";
+          run: dirname ${{ process.env.GITHUB_WORKSPACE }};
 
         - name: Print It
           run: echo ${{ steps.step1.output.folder }}
