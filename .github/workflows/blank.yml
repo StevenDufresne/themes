@@ -21,11 +21,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - name: Extract
-        - id: step1
-        - run: node -e "console.log(`::set-output name=folder::${process.env.GITHUB_HEAD_REF.split('/')[0]}`)";
+          id: step1
+          run: node -e "console.log(`::set-output name=folder::${process.env.GITHUB_HEAD_REF.split('/')[0]}`)";
 
         - name: Print It
-        - run: echo ${{ steps.step1.output.folder }}
+          run: echo ${{ steps.step1.output.folder }}
 #       
 #       - name: Run Theme Check Action
 #         uses: StevenDufresne/wp-theme-validation-action-experiment@main
