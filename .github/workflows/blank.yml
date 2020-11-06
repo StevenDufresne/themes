@@ -3,7 +3,7 @@ name: Spearhead Theme Check
 on:
   pull_request:
     paths:
-    - spearhead/*'
+    - spearhead/**
     
 jobs:
   build:
