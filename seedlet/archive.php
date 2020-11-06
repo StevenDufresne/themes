@@ -8,6 +8,8 @@
  * @since 1.0.0
  */
 
+ var_dump('no way joe');
+
 get_header();
 ?>
 
