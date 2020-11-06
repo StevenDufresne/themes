@@ -22,7 +22,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - name: Extract
           id: step1
-          run: dirname ${{ process.env.GITHUB_WORKSPACE }};
+          run: dirname ${{ github.head_ref }};
 
         - name: Print It
           run: echo ${{ steps.step1.output.folder }}
