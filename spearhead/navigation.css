@@ -13,7 +13,9 @@
 	top: 0;
 	width: 100%;
 }
-
+.somting {
+	color: red;
+}
 @media only screen and (max-width: 829px) {
 	.menu-button-container {
 		display: block;
