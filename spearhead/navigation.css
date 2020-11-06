@@ -16,6 +16,11 @@
 .somting {
 	color: red;
 }
+
+
+.another-one {
+	color: blue;
+}
 @media only screen and (max-width: 829px) {
 	.menu-button-container {
 		display: block;
