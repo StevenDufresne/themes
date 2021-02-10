@@ -11,6 +11,7 @@
  * @since 1.0.0
  */
 
+ vaR_dump('stay');
 ?>
 
 	</div><!-- #content -->
