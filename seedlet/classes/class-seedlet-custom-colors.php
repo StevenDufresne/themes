@@ -20,7 +20,7 @@ class Seedlet_Custom_Colors {
 		/**
 		 * Define color variables
 		 */
-		$this->seedlet_custom_color_variables = array(
+		$seedlet_colors                       = array(
 			array( '--global--color-background', '#FFFFFF', __( 'Background Color', 'seedlet' ) ),
 			array( '--global--color-foreground', '#333333', __( 'Foreground Color', 'seedlet' ) ),
 			array( '--global--color-primary', '#000000', __( 'Primary Color', 'seedlet' ) ),
@@ -28,6 +28,7 @@ class Seedlet_Custom_Colors {
 			array( '--global--color-tertiary', '#FAFBF6', __( 'Tertiary Color', 'seedlet' ) ),
 			array( '--global--color-border', '#EFEFEF', __( 'Borders Color', 'seedlet' ) ),
 		);
+		$this->seedlet_custom_color_variables = apply_filters( 'seedlet_colors', $seedlet_colors );
 
 		/**
 		 * Register Customizer actions
@@ -245,6 +246,10 @@ class Seedlet_Custom_Colors {
 				if ( $theme_mod_variable_name === '--global--color-foreground' && $theme_mod_default_color !== $theme_mod_custom_color ) {
 					$theme_css .= '--global--color-foreground-low-contrast: ' . $adjusted_color . ';';
 				}
+
+				if ( $theme_mod_variable_name === '--global--color-background' && $theme_mod_default_color !== $theme_mod_custom_color ) {
+					$theme_css .= '--global--color-background-high-contrast:' . $theme_mod_custom_color . ';';
+				}
 			}
 		}
 
@@ -262,8 +267,9 @@ class Seedlet_Custom_Colors {
 	 * Customizer & frontend custom color variables.
 	 */
 	function seedlet_custom_color_variables() {
+		wp_enqueue_style( 'seedlet-custom-color-overrides', get_template_directory_uri() . '/assets/css/custom-color-overrides.css', array(), wp_get_theme()->get( 'Version' ) );
 		if ( 'default' !== get_theme_mod( 'custom_colors_active' ) ) {
-			wp_add_inline_style( 'seedlet-style', $this->seedlet_generate_custom_color_variables() );
+			wp_add_inline_style( 'seedlet-custom-color-overrides', $this->seedlet_generate_custom_color_variables() );
 		}
 	}
 
@@ -302,7 +308,7 @@ class Seedlet_Custom_Colors {
 		wp_script_add_data( $handle, 'data', sprintf( 'var seedletValidateWCAGColorContrastExports = %s;', wp_json_encode( $exports ) ) );
 
 		// Custom color contrast validation text
-		wp_localize_script( $handle, 'seedletValidateContrastText', esc_html__( 'This color combination may be hard for people to read. Try using a brighter background color and/or a darker foreground color.', 'seedlet' ) );
+		wp_localize_script( $handle, 'seedletValidateContrastText', array( esc_html__( 'This color combination may be hard for people to read. Try using a brighter background color and/or a darker foreground color.', 'seedlet' ) ) );
 	}
 
 	/**

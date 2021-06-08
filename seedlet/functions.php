@@ -24,6 +24,7 @@ if ( ! function_exists( 'seedlet_setup' ) ) :
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 */
+
 	function seedlet_setup() {
 		/*
 		 * Make theme available for translation.
@@ -108,18 +109,11 @@ if ( ! function_exists( 'seedlet_setup' ) ) :
 
 		$editor_stylesheet_path = './assets/css/style-editor.css';
 
-		// Note, the is_IE global variable is defined by WordPress and is used
-		// to detect if the current browser is internet explorer.
-		global $is_IE;
-		if ( $is_IE ) {
-			$editor_stylesheet_path = './assets/css/ie-editor.css';
-		}
-
 		// Enqueue editor styles.
 		add_editor_style(
 			array(
 				seedlet_fonts_url(),
-				$editor_stylesheet_path,
+				'./assets/css/style-editor.css',
 			)
 		);
 
@@ -263,7 +257,7 @@ if ( ! function_exists( 'seedlet_setup' ) ) :
 		add_theme_support( 'experimental-link-color' );
 
 		// Add support for experimental cover block spacing.
-		add_theme_support( 'experimental-custom-spacing' );
+		add_theme_support( 'custom-spacing' );
 
 		// Add support for custom units.
 		add_theme_support( 'custom-units' );
@@ -310,6 +304,13 @@ function seedlet_fonts_url() {
 		if ( 'off' !== $playfair_display ) {
 			$font_families[] = 'Playfair Display:ital,wght@0,400;0,700;1,400';
 		}
+
+		/**
+		 * A filter to enable child themes to add/change/omit font families.
+		 * 
+		 * @param array $font_families An array of font families to be imploded for the Google Font API
+		 */
+		$font_families = apply_filters( 'included_google_font_families', $font_families );
 
 		$query_args = array(
 			'family' => urlencode( implode( '|', $font_families ) ),
@@ -392,10 +393,10 @@ function seedlet_scripts() {
 	global $is_IE;
 	if ( $is_IE ) {
 		// If IE 11 or below, use a ponyfill to add CSS Variable support
-		wp_register_script( 'css-vars-ponyfill', get_stylesheet_directory_uri() . '/assets/js/css-vars-ponyfill2.js' );
+		wp_register_script( 'css-vars-ponyfill', get_template_directory_uri() . '/assets/js/css-vars-ponyfill2.js' );
 		wp_enqueue_script(
 			'ie11-fix',
-			get_stylesheet_directory_uri() . '/assets/js/ie11-fix.js',
+			get_template_directory_uri() . '/assets/js/ie11-fix.js',
 			array( 'css-vars-ponyfill' ),
 			'1.0'
 		);

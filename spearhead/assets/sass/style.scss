@@ -4,8 +4,10 @@ Theme URI: https://wordpress.com/theme/spearhead
 Author: Automattic
 Author URI: https://automattic.com/
 Description: Share your podcast with the world using Spearhead.
-Requires at least: WordPress 5.4
-Version: 1.2.1
+Requires at least: 5.5
+Tested up to: 5.5
+Requires PHP: 5.6.2
+Version: 1.3.3
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Template: seedlet
@@ -25,3 +27,4 @@ Tags: one-column, flexible-header, accessibility-ready, custom-colors, custom-me
 @import "block-extends";
 @import "search";
 @import "meta";
+@import "woocommerce";

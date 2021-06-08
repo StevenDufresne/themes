@@ -18,10 +18,8 @@ if ( ! function_exists( 'spearhead_setup' ) ) :
 	 * as indicating support for post thumbnails.
 	 */
 	function spearhead_setup() {
-
 		// Add support for editor styles.
 		add_theme_support( 'editor-styles' );
-		add_theme_support( 'dark-editor-style' );
 
 		// Enqueue editor styles.
 		add_editor_style(
@@ -96,11 +94,24 @@ if ( ! function_exists( 'spearhead_setup' ) ) :
 				),
 			)
 		);
+
 		remove_filter( 'excerpt_more', 'seedlet_continue_reading_link' );
 		remove_filter( 'the_content_more_link', 'seedlet_continue_reading_link' );
 	}
 endif;
 add_action( 'after_setup_theme', 'spearhead_setup', 12 );
+
+/**
+ * Filter the colors for Speahead
+ */
+function spearhead_colors() {
+	return array(
+		array( '--global--color-background', '#FFFFFF', __( 'Background Color', 'seedlet' ) ),
+		array( '--global--color-foreground', '#000000', __( 'Foreground Color', 'seedlet' ) ),
+		array( '--global--color-primary', '#DB0042', __( 'Primary Color', 'seedlet' ) ),
+	);
+}
+add_filter( 'seedlet_colors', 'spearhead_colors' );
 
 /**
  * Filter the content_width in pixels, based on the child-theme's design and stylesheet.
@@ -121,7 +132,14 @@ function spearhead_scripts() {
 	wp_enqueue_style( 'spearhead-fonts', spearhead_fonts_url(), array(), null );
 
 	// Child theme variables
+	wp_dequeue_style( 'seedlet-custom-color-overrides' );
 	wp_enqueue_style( 'spearhead-variables-style', get_stylesheet_directory_uri() . '/variables.css', array(), wp_get_theme()->get( 'Version' ) );
+
+	if ( false === get_theme_mod( 'color_darkmode_disable', false ) ) {
+		wp_enqueue_style( 'spearhead-variables-dark-style', get_stylesheet_directory_uri() . '/variables-dark.css', array(), wp_get_theme()->get( 'Version' ) );
+	}
+
+	wp_enqueue_style( 'seedlet-custom-color-overrides' );
 
 	// enqueue child styles
 	wp_enqueue_style( 'spearhead-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
@@ -149,9 +167,9 @@ add_action( 'enqueue_block_assets', 'spearhead_block_extends' );
 /**
  * Add Google webfonts
  *
- * @return string
+ * @return value
  */
-function spearhead_fonts_url() : string {
+function spearhead_fonts_url() {
 	$fonts_url = '';
 
 	$font_families   = array();
@@ -168,7 +186,7 @@ function spearhead_fonts_url() : string {
 /**
  * Load extras
  */
-function seedlet_entry_meta_header() : void {
+function seedlet_entry_meta_header() {
 	// Hide author, post date, category and tag text for pages.
 	if ( 'post' === get_post_type() ) {
 		// Posted on
@@ -222,8 +240,11 @@ function spearhead_more_link() {
 /**
  * Use this instead of the default WordPress ellipsis which is […].
  */
-function spearhead_excerpt_more() {
-	return '…';
+function spearhead_excerpt_more( $more ) {
+	if ( is_admin() ) {
+		return $more;
+	}
+	return '&hellip;';
 }
 
 function spearhead_the_excerpt( $excerpt ) {

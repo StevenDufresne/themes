@@ -4,7 +4,8 @@
  * These selectors set the default max width for content appearing inside a post or page.
  */
 .entry-content > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.entry-attachment):not(.woocommerce),
-*[class*="inner-container"] > *:not(.entry-content):not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.entry-attachment):not(.woocommerce) {
+*[class*="inner-container"] > *:not(.entry-content):not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.entry-attachment):not(.woocommerce),
+.wp-block-template-part > *:not(.entry-content):not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.wp-block-separator):not(.entry-attachment):not(.woocommerce) {
 	@extend %responsive-aligndefault-width;
 }
 
@@ -175,14 +176,6 @@
 
 .has-black-color[class] {
 	color: var(--global--color-black);
-}
-
-// Gutenberg background-color options
-.has-background {
-	&:not(.has-background-background-color) a:not(.has-text-color),
-	p, h1, h2, h3, h4, h5, h6 {
-		color: currentColor;
-	}
 }
 
 .has-primary-background-color[class] {

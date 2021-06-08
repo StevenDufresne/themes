@@ -6,11 +6,12 @@ Author: Automattic
 Author URI: https://automattic.com/
 Description: A variable-based design system for WordPress sites built with Gutenberg.
 Requires at least: WordPress 4.9.6
-Version: 1.5.6
+Version: 1.6.6
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: varia
 Tags: one-column, flexible-header, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, rtl-language-support, sticky-post, threaded-comments, translation-ready, auto-loading-homepage, full-site-editing, jetpack-global-styles
+AMP: true
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -193,10 +194,10 @@ input[type="submit"]:after,
 	margin-top: -0.11em;
 }
 
-.button:hover, button:hover,
-input:hover[type="submit"],
-.wp-block-button__link:hover,
-.wp-block-file__button:hover, .a8c-posts-list__view-all:hover, body .widget_eu_cookie_law_widget #eu-cookie-law input.accept:hover, .button:focus, button:focus,
+.button:not(.has-background):hover, button:not(.has-background):hover,
+input:not(.has-background):hover[type="submit"],
+.wp-block-button__link:not(.has-background):hover,
+.wp-block-file__button:not(.has-background):hover, .a8c-posts-list__view-all:not(.has-background):hover, body .widget_eu_cookie_law_widget #eu-cookie-law input.accept:not(.has-background):hover, .button:focus, button:focus,
 input:focus[type="submit"],
 .wp-block-button__link:focus,
 .wp-block-file__button:focus, .a8c-posts-list__view-all:focus, body .widget_eu_cookie_law_widget #eu-cookie-law input.accept:focus, .has-focus.button, button.has-focus,
@@ -272,10 +273,10 @@ input[type="submit"]:after,
 	margin-top: -0.11em;
 }
 
-.button:hover, button:hover,
-input:hover[type="submit"],
-.wp-block-button__link:hover,
-.wp-block-file__button:hover, .a8c-posts-list__view-all:hover, body .widget_eu_cookie_law_widget #eu-cookie-law input.accept:hover, .button:focus, button:focus,
+.button:not(.has-background):hover, button:not(.has-background):hover,
+input:not(.has-background):hover[type="submit"],
+.wp-block-button__link:not(.has-background):hover,
+.wp-block-file__button:not(.has-background):hover, .a8c-posts-list__view-all:not(.has-background):hover, body .widget_eu_cookie_law_widget #eu-cookie-law input.accept:not(.has-background):hover, .button:focus, button:focus,
 input:focus[type="submit"],
 .wp-block-button__link:focus,
 .wp-block-file__button:focus, .a8c-posts-list__view-all:focus, body .widget_eu_cookie_law_widget #eu-cookie-law input.accept:focus, .has-focus.button, button.has-focus,
@@ -355,7 +356,6 @@ pre {
 	/* 1 */
 	font-size: 1em;
 	/* 2 */
-	overflow: scroll;
 }
 
 /* Text-level semantics
@@ -717,6 +717,10 @@ a {
 
 a:hover {
 	color: indigo;
+}
+
+.has-primary-background-color a:not(.has-text-color) {
+	color: white;
 }
 
 button,
@@ -1413,10 +1417,10 @@ input[type="submit"]:after,
 	margin-top: -0.11em;
 }
 
-.button:hover, button:hover,
-input:hover[type="submit"],
-.wp-block-button__link:hover,
-.wp-block-file__button:hover, .a8c-posts-list__view-all:hover, body .widget_eu_cookie_law_widget #eu-cookie-law input.accept:hover, .button:focus, button:focus,
+.button:not(.has-background):hover, button:not(.has-background):hover,
+input:not(.has-background):hover[type="submit"],
+.wp-block-button__link:not(.has-background):hover,
+.wp-block-file__button:not(.has-background):hover, .a8c-posts-list__view-all:not(.has-background):hover, body .widget_eu_cookie_law_widget #eu-cookie-law input.accept:not(.has-background):hover, .button:focus, button:focus,
 input:focus[type="submit"],
 .wp-block-button__link:focus,
 .wp-block-file__button:focus, .a8c-posts-list__view-all:focus, body .widget_eu_cookie_law_widget #eu-cookie-law input.accept:focus, .has-focus.button, button.has-focus,
@@ -1455,13 +1459,12 @@ button[data-load-more-btn], .button {
  */
 .wp-block-button.is-style-outline.wp-block-button__link,
 .wp-block-button.is-style-outline .wp-block-button__link {
-	color: inherit;
 	border: 2px solid currentcolor;
 	padding: 14px 16px;
 }
 
-.wp-block-button.is-style-outline.wp-block-button__link:not(.has-background-color),
-.wp-block-button.is-style-outline .wp-block-button__link:not(.has-background-color) {
+.wp-block-button.is-style-outline.wp-block-button__link:not(.has-background),
+.wp-block-button.is-style-outline .wp-block-button__link:not(.has-background) {
 	background: transparent;
 }
 
@@ -1480,6 +1483,11 @@ button[data-load-more-btn], .button {
 .wp-block-button.is-style-outline .wp-block-button__link:focus,
 .wp-block-button.is-style-outline .wp-block-button__link.has-focus {
 	color: indigo;
+}
+
+.has-primary-background-color .wp-block-button.is-style-outline.wp-block-button__link:not(.has-text-color), .has-primary-background-color
+.wp-block-button.is-style-outline .wp-block-button__link:not(.has-text-color) {
+	color: white;
 }
 
 .wp-block-button.is-style-squared,
@@ -1582,24 +1590,8 @@ button[data-load-more-btn], .button {
 .wp-block-cover-image .wp-block-cover__inner-container,
 .wp-block-cover-image .wp-block-cover-image-text,
 .wp-block-cover-image .wp-block-cover-text {
-	color: currentColor;
 	margin-top: 32px;
 	margin-bottom: 32px;
-}
-
-.wp-block-cover .wp-block-cover__inner-container a:not(.wp-block-button__link),
-.wp-block-cover .wp-block-cover__inner-container a.wp-block-button__link:hover,
-.wp-block-cover .wp-block-cover-image-text a:not(.wp-block-button__link),
-.wp-block-cover .wp-block-cover-image-text a.wp-block-button__link:hover,
-.wp-block-cover .wp-block-cover-text a:not(.wp-block-button__link),
-.wp-block-cover .wp-block-cover-text a.wp-block-button__link:hover,
-.wp-block-cover-image .wp-block-cover__inner-container a:not(.wp-block-button__link),
-.wp-block-cover-image .wp-block-cover__inner-container a.wp-block-button__link:hover,
-.wp-block-cover-image .wp-block-cover-image-text a:not(.wp-block-button__link),
-.wp-block-cover-image .wp-block-cover-image-text a.wp-block-button__link:hover,
-.wp-block-cover-image .wp-block-cover-text a:not(.wp-block-button__link),
-.wp-block-cover-image .wp-block-cover-text a.wp-block-button__link:hover {
-	color: currentColor;
 }
 
 .wp-block-cover h2,
@@ -2040,10 +2032,6 @@ dd {
 	margin-bottom: 0;
 }
 
-.wp-block-media-text[class*="background-color"]:not(.has-background-background-color) .wp-block-media-text__content a, .wp-block-media-text[style*="background-color"] .wp-block-media-text__content a {
-	color: currentColor;
-}
-
 @media only screen and (min-width: 560px) {
 	.wp-block-media-text.is-stacked-on-mobile .wp-block-media-text__content {
 		padding-top: 32px;
@@ -2354,7 +2342,6 @@ table th,
 .wp-block-table th {
 	padding: calc( 0.5 * 16px);
 	border: 1px solid;
-	word-break: break-all;
 }
 
 table.is-style-stripes tbody tr:nth-child(odd),
@@ -2493,7 +2480,6 @@ table.is-style-stripes tbody tr:nth-child(odd),
 	color: white;
 }
 
-.has-background:not(.has-background-background-color) a:not(.wp-block-button__link),
 .has-background p:not(.has-text-color),
 .has-background h1:not(.has-text-color),
 .has-background h2:not(.has-text-color),
@@ -2507,12 +2493,20 @@ table.is-style-stripes tbody tr:nth-child(odd),
 .has-primary-background-color,
 .has-primary-background-color.has-background-dim {
 	background-color: blue;
+}
+
+.has-primary-background-color:not(.has-text-color),
+.has-primary-background-color.has-background-dim:not(.has-text-color) {
 	color: white;
 }
 
 .has-secondary-background-color,
 .has-secondary-background-color.has-background-dim {
 	background-color: red;
+}
+
+.has-secondary-background-color:not(.has-text-color),
+.has-secondary-background-color.has-background-dim:not(.has-text-color) {
 	color: white;
 }
 
@@ -2520,36 +2514,61 @@ table.is-style-stripes tbody tr:nth-child(odd),
 .has-foreground-background-color,
 .has-foreground-background-color.has-background-dim {
 	background-color: #444444;
+}
+
+.has-background-dim,
+.has-foreground-background-color,
+.has-foreground-background-color.has-background-dim {
 	color: white;
 }
 
 .has-foreground-light-background-color,
 .has-foreground-light-background-color.has-background-dim {
 	background-color: #767676;
+}
+
+.has-foreground-light-background-color:not(.has-text-color),
+.has-foreground-light-background-color.has-background-dim:not(.has-text-color) {
 	color: white;
 }
 
 .has-foreground-dark-background-color,
 .has-foreground-dark-background-color.has-background-dim {
 	background-color: #111111;
+}
+
+.has-foreground-dark-background-color:not(.has-text-color),
+.has-foreground-dark-background-color.has-background-dim:not(.has-text-color) {
 	color: white;
 }
 
 .has-background-light-background-color,
 .has-background-light-background-color.has-background-dim {
 	background-color: #FAFAFA;
+}
+
+.has-background-light-background-color:not(.has-text-color),
+.has-background-light-background-color.has-background-dim:not(.has-text-color) {
 	color: #444444;
 }
 
 .has-background-dark-background-color,
 .has-background-dark-background-color.has-background-dim {
 	background-color: #DDDDDD;
+}
+
+.has-background-dark-background-color:not(.has-text-color),
+.has-background-dark-background-color.has-background-dim:not(.has-text-color) {
 	color: #444444;
 }
 
 .has-background-background-color,
 .has-background-background-color.has-background-dim {
 	background-color: white;
+}
+
+.has-background-background-color:not(.has-text-color),
+.has-background-background-color.has-background-dim:not(.has-text-color) {
 	color: #444444;
 }
 
@@ -3204,7 +3223,7 @@ body:not(.fse-enabled) .footer-menu a {
 }
 
 .entry-content .more-link:after {
-	content: "\02192";
+	content: "→" /*rtl:"←"*/;
 	display: inline-block;
 	margin-left: 0.5em;
 }
@@ -3220,6 +3239,22 @@ body:not(.fse-enabled) .footer-menu a {
 	margin-left: auto !important;
 	margin-right: auto !important;
 	overflow: scroll;
+}
+
+.home.page.hide-homepage-header.hide-homepage-title .entry-content {
+	margin-top: 0;
+	padding-top: 0;
+}
+
+.home.page.hide-homepage-header.hide-homepage-title .entry-content > *:first-child {
+	margin-top: 32px;
+}
+
+.home.page.hide-homepage-header.hide-homepage-title .entry-content > .wp-block-image.alignfull:first-child,
+.home.page.hide-homepage-header.hide-homepage-title .entry-content > .wp-block-cover.alignfull:first-child,
+.home.page.hide-homepage-header.hide-homepage-title .entry-content > .wp-block-media-text.alignfull:first-child,
+.home.page.hide-homepage-header.hide-homepage-title .entry-content > .wp-block-group.has-background.alignfull:first-child {
+	margin-top: -32px;
 }
 
 .entry-attachment {

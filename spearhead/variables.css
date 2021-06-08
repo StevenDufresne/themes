@@ -11,6 +11,7 @@
 	--global--color-foreground: #000000;
 	--global--color-foreground-low-contrast: #333333;
 	--global--color-background: #fff;
+	--global--color-background-high-contrast: #F9F9F9;
 	--global--color-border: var(--global--color-secondary);
 	/* Font Weight */
 	--global--font-weight: 500;
@@ -51,6 +52,7 @@
 
 	--entry-header--font-size: var(--heading--font-size-h1);
 	--entry-header--color: var(--global--color-foreground);
+	--entry-header--color-link: var(--entry-header--color);
 
 	--button--border-radius: 0px;
 	--button--color-text: var(--global--color-background);
@@ -88,7 +90,7 @@
 	--list--font-family: var(--global--font-secondary);
 
 	/* Sticky Posts */
-	--sticky-posts--color-background: #F9F9F9;
+	--sticky-posts--color-background: var(--global--color-background-high-contrast);
 	--sticky-posts--entry-title-font-size: 24px;
 	--sticky-posts--entry-content-font-size: 20px;
 	--sticky-posts--alt-color-background: var(--global--color-background);
@@ -99,21 +101,4 @@
 	--form--spacing-unit: 6px;
 	--form--color-text: var(--global--color-secondary);
 
-}
-
-@media ( prefers-color-scheme: dark ) {
-	:root {
-		--global--color-primary: #ff6a81;
-		--global--color-primary-hover: #ffffff;
-		--global--color-secondary: #b2b2b2;
-		--global--color-secondary-hover: #cccccc;
-		--global--color-foreground: #ffffff;
-		--global--color-foreground-low-contrast: #b2b2b2;
-		--global--color-background: #1e1f21;
-		--global--color-text-selection: #000000;
-		--sticky-posts--color-background: var(--global--color-background);
-		--sticky-posts--alt-color-background: #2d3139;
-		--primary-nav--color-background: var(--sticky-posts--alt-color-background);
-		--primary-nav--dropdown-color-link: var(--global--color-foreground);
-	}
 }

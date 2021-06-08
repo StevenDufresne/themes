@@ -13,6 +13,7 @@ if ( ! function_exists( 'independent_publisher_2_setup' ) ) :
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 */
+
 	function independent_publisher_2_setup() {
 		/*
 		 * Make theme available for translation.
@@ -101,6 +102,12 @@ if ( ! function_exists( 'independent_publisher_2_setup' ) ) :
 
 		// Add support for full and wide align images.
 		add_theme_support( 'align-wide' );
+
+		// Add support for custom line height controls.
+		add_theme_support( 'custom-line-height' );
+
+		// Add support for experimental cover block spacing.
+		add_theme_support( 'custom-spacing' );
 
 		// Add support for custom color scheme.
 		add_theme_support(
@@ -237,12 +244,12 @@ function independent_publisher_2_scripts() {
 	wp_enqueue_script( 'independent-publisher-2-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20170317', true );
 
 	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-		wp_enqueue_script( 'independent-publisher-2-images', get_template_directory_uri() . '/js/independent-publisher-2.js', array( 'jquery' ), '20170406', true );
+		wp_enqueue_script( 'independent-publisher-2-images', get_template_directory_uri() . '/js/independent-publisher-2.js', array(), '20210118', true );
 	}
 
 	// If there's an active Video widget, and it's (hopefully) in the footer widget area
 	if ( is_active_widget( '', '', 'media_video' ) && ( is_active_sidebar( 'sidebar-2' ) || is_active_sidebar( 'sidebar-3' ) || is_active_sidebar( 'sidebar-4' ) ) ) {
-		wp_enqueue_script( 'independent-publisher-2-video-widget', get_template_directory_uri() . '/js/video-widget.js', array( 'jquery' ), '20170608', true );
+		wp_enqueue_script( 'independent-publisher-2-video-widget', get_template_directory_uri() . '/js/video-widget.js', array(), '20210111', true );
 	}
 
 	wp_enqueue_script( 'independent-publisher-2-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20170315', true );

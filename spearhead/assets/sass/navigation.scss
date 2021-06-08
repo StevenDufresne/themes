@@ -9,6 +9,11 @@ $navigation-max-break-point: 'laptop-only';
 
 @import "../../../seedlet/assets/sass/components/navigation/style";
 
+.navigation-wrapper {
+	grid-area: primary-navigation;
+	margin: 0;
+}
+
 .primary-navigation,
 .woo-navigation {
 	// Top-level Menu Item
@@ -29,6 +34,9 @@ $navigation-max-break-point: 'laptop-only';
 		@include media( $navigation-min-break-point ) {
 			padding: calc(0.5 * var(--primary-nav--padding)) calc( 2 * var(--primary-nav--padding) );
 			transition: all 0.15s ease;
+			text-align: right;
+			left: unset;
+			right: 0;
 
 			> .menu-item.menu-item-has-children {
 				padding: calc(0.5 * var(--primary-nav--padding)) calc( 2 * var(--primary-nav--padding) ) 0 0;
@@ -37,12 +45,15 @@ $navigation-max-break-point: 'laptop-only';
 	}
 }
 
+.woo-navigation {
+	padding-left: calc(2 * var(--primary-nav--padding));
+}
+
 .social-navigation > div {
 	ul li {
 		width: auto;
 	}
 }
-
 
 $header-height: 80px;
 div.extra-navigation-wrapper {
@@ -60,6 +71,16 @@ div.extra-navigation-wrapper {
 		visibility: visible;
 		opacity: 1;
 		transform: translateY( $header-height );
+
+		.menu-item > a {
+			&:hover, &:focus {
+				color: #ff6a81; // Use the dark mode styles so that the focus styles are accessible.
+			}
+
+			&:active {
+				color: #b2b2b2; // Use the dark mode styles so that the focus styles are accessible.
+			}
+		}
 	}
 
 	$menu-offset-with-logo: calc( var(--branding--logo--max-height) + ( 2 * var(--global--spacing-vertical) ) );
@@ -69,10 +90,20 @@ div.extra-navigation-wrapper {
 	}
 }
 
-.has-logo.has-title-and-tagline .menu-button-container {
-	top: calc( var(--branding--logo--max-height) + var(--global--spacing-vertical) );
+.menu-button-container {
+	position: relative;
+	left: unset;
+	top: unset;
 
-	.admin-bar & {
-		top: calc( var(--wpadmin-bar--height) + var(--branding--logo--max-height) + var(--global--spacing-vertical) );
+	.button#woo-open-menu {
+		margin-top: 0;
 	}
+
+	.admin-bar:not(.primary-navigation-open) & {
+		top: unset;
+	}
+}
+
+.social-navigation {
+	grid-area: navigation;
 }
